@@ -115,10 +115,18 @@ public class CustomTextClock extends TextView {
 
         switch(handType){
             case 0:
-                setText(getIntString(hour));
+                if (hour == 12 && minute == 0) {
+                setText("High");
+                } else {
+                setText(getIntStringHour(hour));
+                }
                 break;
             case 1:
-                setText(getIntString(minute));
+                if (hour == 12 && minute == 0) {
+                setText("Noon");
+                } else {
+                setText(getIntStringMin(minute));
+                }
                 break;
             default:
                 break;
@@ -149,7 +157,25 @@ public class CustomTextClock extends TextView {
         setContentDescription(contentDescription);
     }
 
-    private String getIntString (int num) {
+    private String getIntStringHour (int num) {
+        int tens, units;
+        String NumString = "";
+        if(num >= 20) {
+            units = num % 10 ;
+            tens =  num / 10;
+            if ( units == 0 ) {
+                NumString = TensStringH[tens];
+            } else {
+                NumString = TensStringH[tens]+" "+UnitsStringH[units];
+            }
+        } else if (num < 20 ) {
+            NumString = UnitsStringH[num];
+        }
+
+        return NumString;
+    }
+
+    private String getIntStringMin (int num) {
         int tens, units;
         String NumString = "";
         if(num >= 20) {
@@ -161,48 +187,9 @@ public class CustomTextClock extends TextView {
                 NumString = TensString[tens]+" "+UnitsString[units];
             }
         } else if (num < 10 ) {
-            NumString = UnitsString[num];
+            NumString = "O\'"+UnitsString[num];
         } else if (num >= 10 && num < 20) {
-                switch (num) {
-                    case 10:
-                        NumString = "Ten";
-                        break;
-                    case 11:
-                        NumString = "Eleven";
-                        break;
-
-                    case 12:
-                        NumString = "Twelve";
-                        break;
-
-                    case 13:
-                        NumString = "Thirteen";
-                        break;
-                    case 14:
-                        NumString = "Fourteen";
-                        break;
-
-                    case 15:
-                        NumString = "Fifteen";
-                        break;
-
-                    case 16:
-                        NumString = "Sixteen";
-                        break;
-                    case 17:
-                        NumString = "Seventeen";
-                        break;
-
-                    case 18:
-                        NumString = "Eighteen";
-                        break;
-
-                    case 19:
-                        NumString = "Nineteen";
-                        break;
-                    default:
-                        break;
-            }
+            NumString = UnitsString[num];
         }
 
         return NumString;
