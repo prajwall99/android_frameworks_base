@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Typeface;
 import android.text.format.DateUtils;
 import android.text.format.DateFormat;
 import android.text.format.Time;
@@ -23,7 +22,9 @@ import com.android.systemui.R;
 public class CustomTextClock extends TextView {
 
     private final String[] TensString = {"", "", "Twenty","Thirty","Forty", "Fifty", "Sixty"};
-    private final String[] UnitsString = {"Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+    private final String[] UnitsString = {"Clock", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+    private final String[] TensStringH = {"", "", "Twenty","Thirty","Forty", "Fifty", "Sixty"};
+    private final String[] UnitsStringH = {"Twelve", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
 
     private Time mCalendar;
 
@@ -43,10 +44,7 @@ public class CustomTextClock extends TextView {
         final TypedArray a = context.obtainStyledAttributes(
                 attrs, R.styleable.CustomTextClock);
 
-        handType = a.getInteger(R.styleable.CustomTextClock_HandType, 0);
-
-        Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "Rounded_Elegance.ttf");
-        setTypeface(myTypeface);
+        handType = a.getInteger(R.styleable.CustomTextClock_HandType, 2);
 
         mCalendar = new Time();
 
